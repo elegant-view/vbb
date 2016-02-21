@@ -7,5 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "promise": "github:ecomfe/promise",
+    "superagent": "^1.7.2",
+    "vcomponent": "github:elegant-view/vcomponent"
+  }
 }
