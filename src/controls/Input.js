@@ -1,5 +1,5 @@
 /**
- * @file Input控件,对原生input的封装
+ * @file Input控件，对原生input的封装
  *      props:
  *          type
  *          value
@@ -53,7 +53,7 @@ define([
      * @private
      */
     Input.prototype.onChange = function () {
-        if (this.props.validateWhenChange) {
+        if (this.props.validateWhenChange && this.props.validateWhenChange !== 'false') {
             var result = this.validate();
             if (this.props.onValidateResult instanceof Function) {
                 this.props.onValidateResult(result);
