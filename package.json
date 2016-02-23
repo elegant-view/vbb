@@ -13,5 +13,10 @@
     "promise": "github:ecomfe/promise",
     "superagent": "^1.7.2",
     "vcomponent": "github:elegant-view/vcomponent"
+  },
+  "devDependencies": {
+    "connect": "^3.4.1",
+    "node-sass": "^3.4.2",
+    "serve-static": "^1.10.2"
   }
 }
