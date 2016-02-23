@@ -8,17 +8,28 @@ define(['backbone', 'vcomponent'], function (Backbone, v) {
         },
 
         render: function () {
-            this.el.innerHTML = this.template;
+            var div = document.createElement('div');
+            div.innerHTML = this.template || '<!-- no html -->';
 
             this.$v = new v.VComponent({
-                startNode: this.el,
-                endNode: this.el
+                startNode: div.firstChild,
+                endNode: div.lastChild
             });
 
             this.$v.registerComponents(this.getComponents());
             this.$v.render();
 
             this.ready();
+
+            // 将node放到页面中去
+            var me = this;
+            setTimeout(function () {
+                me.el.innerHTML = '';
+                while (div.childNodes.length) {
+                    me.el.appendChild(div.childNodes[0]);
+                }
+            });
+
         },
 
         ready: function () {},

@@ -53,6 +53,7 @@ define([
      * @private
      */
     Input.prototype.onChange = function () {
+        debugger
         if (this.props.validateWhenChange && this.props.validateWhenChange !== 'false') {
             var result = this.validate();
             if (this.props.onValidateResult instanceof Function) {

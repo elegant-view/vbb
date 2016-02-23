@@ -20,26 +20,39 @@ define(
         Tip
     ) {
 
-        function InputField() {
+        function Field() {
             v.Component.apply(this, arguments);
         }
 
-        InputField.prototype.getTemplate = function () {
+        Field.prototype.getTemplate = function () {
             return '' +
-                '<fieldset>' +
+                '<div class="${props.class}">' +
                     '<label>${props.label}</label>' +
                     '<div>${props.children}</div>' +
                     '<!-- if: props.errorMessage --><ui-tip type="error">${props.errorMessage}</ui-tip><!-- /if -->' +
-                '</fieldset>';
+                '</div>';
         };
 
-        InputField.prototype.getComponentClasses = function () {
+        Field.prototype.getComponentClasses = function () {
             return [Tip];
         };
 
-        return createClass(v.Component, InputField, {
+        return createClass(v.Component, Field, {
             getStyle: function () {
-
+                return '' +
+                    '.field {' +
+                        'display: flex;' +
+                        'align-items: center;' +
+                        'margin-bottom: .5rem;' +
+                    '}' +
+                    '.field label {' +
+                        'width: 5rem;' +
+                        'text-align: right;' +
+                        'margin-right: 1rem;' +
+                    '}' +
+                    '.field .tip {' +
+                        'margin-left: 1rem;' +
+                    '}';
             }
         });
 

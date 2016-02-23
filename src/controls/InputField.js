@@ -5,7 +5,7 @@ define(
         '../createClass',
         './Field',
         './Input',
-        'u'
+        'underscore'
     ],
     function (
         v,
