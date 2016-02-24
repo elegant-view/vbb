@@ -3,9 +3,10 @@
  *      props:
  *          type
  *          value
- *          validateRegexp
+ *          validateRegExp
  *          validateRegExpMessage
  *          validateFn
+ *          onValidateResult
  *          validateWhenChange
  *          onValidateResult
  * @author yibuyisheng(yibuyisheng@163.com)
@@ -53,12 +54,15 @@ define([
      * @private
      */
     Input.prototype.onChange = function () {
-        debugger
         if (this.props.validateWhenChange && this.props.validateWhenChange !== 'false') {
             var result = this.validate();
             if (this.props.onValidateResult instanceof Function) {
                 this.props.onValidateResult(result);
             }
+        }
+
+        if (this.props.onChange instanceof Function) {
+            this.props.onChange();
         }
     };
 
@@ -95,7 +99,7 @@ define([
     Input.prototype.validate = function () {
         var value = this.getValue();
 
-        if (this.props.validateRegexp instanceof RegExp) {
+        if (this.props.validateRegExp instanceof RegExp) {
             if (!this.props.validateRegExp.test(value)) {
                 return this.props.validateRegExpMessage || false;
             }

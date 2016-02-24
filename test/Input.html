@@ -1,0 +1,53 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Input</title>
+</head>
+<body>
+    <div id="main">
+        <ui-input
+             on-change="${onChange}"
+             validate-when-change="true"
+             validate-reg-exp-message="输入有误"
+             on-validate-result="${onValidateResult}"
+             validate-reg-exp="${/123/}"></ui-input>
+    </div>
+    <script src="../node_modules/requirejs/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '/src',
+            packages: [
+                {
+                    name: 'vcomponent',
+                    location: '../node_modules/vcomponent',
+                    main: 'dist/main'
+                },
+                {
+                    name: 'underscore',
+                    location: '../node_modules/underscore',
+                    main: 'underscore.js'
+                }
+            ]
+        });
+    </script>
+    <script>
+        require(['vcomponent', 'controls/Input'], function (v, Input) {
+            var node = document.getElementById('main');
+            var vc = new v.VComponent({
+                startNode: node,
+                endNode: node
+            });
+            vc.registerComponents([Input]);
+            vc.render();
+            vc.setData({
+                onChange: function () {
+                    console.log('changed');
+                },
+                onValidateResult: function (result) {
+                    console.log('validate result:', result);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -39,4 +39,6 @@ app.use(function (req, res, next) {
 // 默认就直接发送静态文件
 app.use(serveStatic('./'));
 
-http.createServer(app).listen(3000);
+var port = process.argv[2] || 3000;
+http.createServer(app).listen(port);
+console.log('server is listening on port:', port);
