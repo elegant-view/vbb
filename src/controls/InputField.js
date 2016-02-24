@@ -63,6 +63,10 @@ define(
             this.setState({errorMessage: msg});
         };
 
+        InputField.prototype.validate = function () {
+            return this.refs.input.validate();
+        };
+
         return createClass(v.Component, InputField, {
             getStyle: function () {
 
