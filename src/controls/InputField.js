@@ -7,14 +7,12 @@ define(
         './Input',
         'underscore'
     ],
-    function (
-        v,
-        underscore,
-        createClass,
-        Field,
-        Input,
-        u
-    ) {
+    function (v,
+              underscore,
+              createClass,
+              Field,
+              Input,
+              u) {
 
         function InputField() {
             v.Component.apply(this, arguments);
@@ -23,12 +21,12 @@ define(
         InputField.prototype.getTemplate = function () {
             return '' +
                 '<ui-field label="${props.label}" error-message="${state.errorMessage}">' +
-                    '<ui-input' +
-                        ' ref="input"' +
-                        ' d-rest="${props}"' +
-                        ' validate-when-change="true"' +
-                        ' on-validate-result="${state.onValidateResult}">' +
-                    '</ui-input>' +
+                '<ui-input' +
+                ' ref="input"' +
+                ' d-rest="${props}"' +
+                ' validate-when-change="true"' +
+                ' on-validate-result="${state.onValidateResult}">' +
+                '</ui-input>' +
                 '</ui-field>';
         };
 
@@ -41,15 +39,17 @@ define(
             this.setState({
                 onValidateResult: function (result) {
                     if (!result) {
-                        me.setState({
-                            errorMessage: '输入有误'
-                        });
+                        me.showError('输入有误');
                     }
                     else if (u.isString(result)) {
-                        me.setState({errorMessage: result});
+                        me.showError(result);
                     }
                     else {
-                        me.setState({errorMessage: null});
+                        me.showError(null);
+                    }
+
+                    if (me.props.onValidateResult instanceof Function) {
+                        me.props.onValidateResult(result);
                     }
                 }
             });
@@ -59,9 +59,14 @@ define(
             return this.refs.input.getValue();
         };
 
+        InputField.prototype.showError = function (msg) {
+            this.setState({errorMessage: msg});
+        };
+
         return createClass(v.Component, InputField, {
             getStyle: function () {
 
             }
         });
-});
+    }
+);

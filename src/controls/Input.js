@@ -28,11 +28,11 @@ define([
     Input.prototype.getTemplate = function () {
         return '' +
             '<input type="${state.type}"' +
-                ' class="${props.class.concat(\' \')}"' +
-                ' value="${state.value}"' +
-                ' ref="input"' +
-                ' on-change="${state.onChange()}"' +
-                ' />';
+            ' class="${props.class.concat(\' \')}"' +
+            ' value="${state.value}"' +
+            ' ref="input"' +
+            ' on-change="${state.onChange()}"' +
+            ' />';
     };
 
     /**
@@ -124,16 +124,16 @@ define([
         getStyle: function () {
             return '' +
                 'input {' +
-                    'height: 2.4rem;' +
-                    'border: .06rem solid #ccc;' +
-                    'padding: 0 .4rem;' +
-                    'font-size: 1.1rem;' +
+                'height: 2.4rem;' +
+                'border: .06rem solid #ccc;' +
+                'padding: 0 .4rem;' +
+                'font-size: 1.1rem;' +
 
-                    '&:focus,' +
-                    '&:active {' +
-                        'outline: none;' +
-                        'border-color: #66afe9;' +
-                    '}' +
+                '&:focus,' +
+                '&:active {' +
+                'outline: none;' +
+                'border-color: #66afe9;' +
+                '}' +
                 '}';
         }
     });
