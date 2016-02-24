@@ -24,6 +24,7 @@ define(
             return '' +
                 '<ui-field label="${props.label}" error-message="${state.errorMessage}">' +
                     '<ui-input' +
+                        ' ref="input"' +
                         ' d-rest="${props}"' +
                         ' validate-when-change="true"' +
                         ' on-validate-result="${state.onValidateResult}">' +
@@ -52,6 +53,10 @@ define(
                     }
                 }
             });
+        };
+
+        InputField.prototype.getValue = function () {
+            return this.refs.input.getValue();
         };
 
         return createClass(v.Component, InputField, {
