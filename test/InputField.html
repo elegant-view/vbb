@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Input</title>
+</head>
+<body>
+    <div id="main">
+        <ui-input-field
+             label="test"
+             validate-when-change="true"
+             validate-reg-exp-message="输入有误"
+             validate-reg-exp="${/123/}"></ui-input-field>
+    </div>
+    <script src="../node_modules/requirejs/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '/src',
+            packages: [
+                {
+                    name: 'vcomponent',
+                    location: '../node_modules/vcomponent',
+                    main: 'dist/main'
+                },
+                {
+                    name: 'underscore',
+                    location: '../node_modules/underscore',
+                    main: 'underscore.js'
+                }
+            ]
+        });
+    </script>
+    <script>
+        require(['vcomponent', 'controls/InputField'], function (v, InputField) {
+            var node = document.getElementById('main');
+            var vc = new v.VComponent({
+                startNode: node,
+                endNode: node
+            });
+            vc.registerComponents([InputField]);
+            vc.render();
+        });
+    </script>
+</body>
+</html>

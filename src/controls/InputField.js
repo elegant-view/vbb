@@ -24,13 +24,9 @@ define(
             return '' +
                 '<ui-field label="${props.label}" error-message="${state.errorMessage}">' +
                     '<ui-input' +
-                        ' type="${props.type}"' +
-                        ' value="${props.value}"' +
-                        ' validate-regexp="${props.validateRegexp}">' +
-                        ' validate-reg-exp-message="${props.validateRegExpMessage}"' +
-                        ' validate-fn="${props.validateFn}"' +
+                        ' d-rest="${props}"' +
                         ' validate-when-change="true"' +
-                        ' on-validate-result="${state.onValidateResult}"' +
+                        ' on-validate-result="${state.onValidateResult}">' +
                     '</ui-input>' +
                 '</ui-field>';
         };
@@ -40,15 +36,19 @@ define(
         };
 
         InputField.prototype.ready = function () {
+            var me = this;
             this.setState({
                 onValidateResult: function (result) {
                     if (!result) {
-                        this.setState({
+                        me.setState({
                             errorMessage: '输入有误'
                         });
                     }
                     else if (u.isString(result)) {
-                        this.setState({errorMessage: result});
+                        me.setState({errorMessage: result});
+                    }
+                    else {
+                        me.setState({errorMessage: null});
                     }
                 }
             });
