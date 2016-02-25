@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dialog</title>
+    <link rel="stylesheet" href="./main.scss">
+</head>
+<body>
+<div id="main">
+    <button on-click="${onTestClick()}">test</button>
+    <ui-dialog title="${title}" is-visible="${dialogVisible}" on-close="${onDialogClose}">
+        content
+    </ui-dialog>
+</div>
+<script src="../node_modules/requirejs/require.js"></script>
+<script>
+    require.config({
+        baseUrl: '/src',
+        packages: [
+            {
+                name: 'vcomponent',
+                location: '../node_modules/vcomponent',
+                main: 'dist/main'
+            },
+            {
+                name: 'underscore',
+                location: '../node_modules/underscore',
+                main: 'underscore.js'
+            }
+        ]
+    });
+</script>
+<script>
+    require(['vcomponent', 'controls/dialog/Dialog'], function (v, Dialog) {
+        var node = document.getElementById('main');
+        var vc = new v.VComponent({
+            startNode: node,
+            endNode: node
+        });
+        vc.registerComponents([Dialog]);
+        vc.render();
+        vc.setData({
+            title: '对话框',
+            onTestClick: function () {
+                var isVisible = vc.getData('dialogVisible');
+                vc.setData({
+                    dialogVisible: !isVisible
+                });
+            },
+            onDialogClose: function () {
+                vc.setData({
+                    dialogVisible: false
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

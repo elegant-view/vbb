@@ -1,0 +1,12 @@
+<!-- if: state.isVisible -->
+    <div class="dialog overlay"></div>
+    <div class="dialog">
+        <div class="title">
+            ${props.title}
+            <a class="close" on-click="${props.onClose()}">X</a>
+        </div>
+        <div class="content">
+            ${props.children}
+        </div>
+    </div>
+<!-- /if -->

@@ -1,0 +1,35 @@
+.dialog {
+    position: fixed;
+    min-width: 30rem;
+    border: 1px solid #ddd;
+    margin-left: -15rem;
+    left: 50%;
+    top: 15%;
+
+    .title {
+        background: #ddd;
+        font-size: 1rem;
+        padding: .5rem .8rem;
+    }
+
+    .content {
+        padding: .8rem;
+        background: #fff;
+    }
+
+    .close {
+        color: #666;
+        cursor: pointer;
+        float: right;
+    }
+
+    &.overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: #000;
+        opacity: .3;
+    }
+}
