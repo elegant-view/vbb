@@ -20,13 +20,13 @@ define(
 
         InputField.prototype.getTemplate = function () {
             return '' +
-                '<ui-field label="${props.label}" error-message="${state.errorMessage}">' +
-                '<ui-input' +
-                ' ref="input"' +
-                ' d-rest="${props}"' +
-                ' validate-when-change="true"' +
-                ' on-validate-result="${state.onValidateResult}">' +
-                '</ui-input>' +
+                '<ui-field label="${props.label}" error-message="${state.errorMessage}" label-width="${props.labelWidth}">' +
+                    '<ui-input' +
+                        ' ref="input"' +
+                        ' d-rest="${props}"' +
+                        ' validate-when-change="true"' +
+                        ' on-validate-result="${state.onValidateResult}">' +
+                    '</ui-input>' +
                 '</ui-field>';
         };
 

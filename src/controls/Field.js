@@ -27,7 +27,7 @@ define(
         Field.prototype.getTemplate = function () {
             return '' +
                 '<div class="${props.class}">' +
-                    '<label>${props.label}</label>' +
+                    '<label style="${state.labelStyleObj}">${props.label}</label>' +
                     '<div>${props.children}</div>' +
                     '<!-- if: props.errorMessage --><ui-tip type="error">${props.errorMessage}</ui-tip><!-- /if -->' +
                 '</div>';
@@ -35,6 +35,19 @@ define(
 
         Field.prototype.getComponentClasses = function () {
             return [Tip];
+        };
+
+        Field.prototype.ready = function () {
+            this.setLabelWidth();
+        };
+
+        Field.prototype.propsChange = function () {
+            this.setLabelWidth();
+        };
+
+        Field.prototype.setLabelWidth = function () {
+            var width = this.props.labelWidth || '5rem';
+            this.setState({labelStyleObj: {width: width}});
         };
 
         return createClass(v.Component, Field, {

@@ -28,11 +28,11 @@ define([
     Input.prototype.getTemplate = function () {
         return '' +
             '<input type="${state.type}"' +
-            ' class="${props.class.concat(\' \')}"' +
-            ' value="${state.value}"' +
-            ' ref="input"' +
-            ' on-change="${state.onChange()}"' +
-            ' />';
+                ' class="${props.class.concat(\' \')}"' +
+                ' value="${state.value}"' +
+                ' ref="input"' +
+                ' on-change="${state.onChange()}"' +
+                ' />';
     };
 
     /**
