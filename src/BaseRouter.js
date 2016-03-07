@@ -19,17 +19,18 @@ define(['backbone', 'underscore'], function (Backbone, u) {
             var me = this;
             u.forEach(this.routes, function (View, route) {
                 me.route(route, route, function () {
-                    me.createView(View, me.getContentEl());
+                    me.createView(View, me.getContentEl(), arguments);
                 });
             });
         },
 
-        createView: function (View, el) {
+        createView: function (View, el, urlArgs) {
             this.currentContentView && this.currentContentView.destroy();
             this.currentContentView = null;
             this.currentContentView = new View({
                 el: el,
-                context: this.getContext()
+                context: this.getContext(),
+                urlArgs: urlArgs
             });
         }
     });
