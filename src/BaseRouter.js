@@ -1,4 +1,7 @@
-define(['backbone', 'underscore'], function (Backbone, u) {
+define(function (require) {
+    var Backbone = require('backbone');
+    var u = require('underscore');
+
     return Backbone.Router.extend({
         contentEl: document.getElementById('content'),
         getContentEl: function () {
@@ -18,8 +21,8 @@ define(['backbone', 'underscore'], function (Backbone, u) {
         createRoute: function () {
             var me = this;
             u.forEach(this.routes, function (View, route) {
-                me.route(route, route, function () {
-                    me.createView(View, me.getContentEl(), arguments);
+                me.route(route + '~*params', route, function (params) {
+                    me.createView(View, me.getContentEl(), me.parseHashParams(params));
                 });
             });
         },
@@ -32,6 +35,23 @@ define(['backbone', 'underscore'], function (Backbone, u) {
                 context: this.getContext(),
                 urlArgs: urlArgs
             });
+        },
+
+        parseHashParams: function parseHashParams(params) {
+            if (!params) {
+                return {};
+            }
+
+            params = params.split('&');
+
+            var ret = {};
+            u.map(params, function (item) {
+                var itemSplit = item.split('=');
+                if (itemSplit.length === 2) {
+                    ret[itemSplit[0]] = itemSplit[1];
+                }
+            });
+            return ret;
         }
     });
 });
