@@ -1,6 +1,7 @@
 define(function (require) {
     var Backbone = require('backbone');
     var u = require('underscore');
+    var Promise = require('promise');
 
     return Backbone.Router.extend({
         contentEl: document.getElementById('content'),
@@ -21,8 +22,10 @@ define(function (require) {
         createRoute: function () {
             var me = this;
             u.forEach(this.routes, function (View, route) {
-                me.route(route + '~*params', route, function (params) {
-                    me.createView(View, me.getContentEl(), me.parseHashParams(params));
+                me.route(route + '*params', route, function (params) {
+                    params = me.parseHashParams(params);
+                    var contentEl = me.getContentEl();
+                    me.createView(View, contentEl, params);
                 });
             });
         },
@@ -35,14 +38,22 @@ define(function (require) {
                 context: this.getContext(),
                 urlArgs: urlArgs
             });
+
+            var me = this;
+            Promise.resolve(this.currentContentView.canEnter())
+                .then(function (canEnter) {
+                    if (canEnter) {
+                        me.currentContentView.enter();
+                    }
+                });
         },
 
         parseHashParams: function parseHashParams(params) {
-            if (!params) {
+            if (!params || params.indexOf('~') !== 0) {
                 return {};
             }
 
-            params = params.split('&');
+            params = params.slice(1).split('&');
 
             var ret = {};
             u.map(params, function (item) {

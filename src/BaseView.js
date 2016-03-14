@@ -45,11 +45,23 @@ define(function (require) {
         },
 
         initialize: function (options) {
+            this.$$options = options;
             this.context = options.context;
+        },
+
+        // 是否能够进入view。此处可以做一些检查，比如是否登陆等等。
+        canEnter: function canEnter() {
+            return true;
+        },
+
+        // 进入
+        enter: function () {
+            var options = this.$$options;
+
             this.model = new this.Model();
             this.model.set(options.urlArgs);
             this.render();
-            this.$v.setData(u.extend({}, this.getTemplateData(), this.getTemplateCallbacks()));
+            this.setData(u.extend({}, this.getTemplateData(), this.getTemplateCallbacks()));
         },
 
         render: function () {
@@ -84,7 +96,7 @@ define(function (require) {
         },
 
         destroy: function () {
-            this.$v.destroy();
+            this.$v && this.$v.destroy();
         }
     });
 });
