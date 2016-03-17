@@ -1,3 +1,8 @@
+/**
+ * @file 模板加载插件
+ * @author yibuyisheng(yibuyisheng@163.com)
+ */
+
 define({
     load: function (name, req, onload) {
         var url = req.toUrl(name);
@@ -7,7 +12,7 @@ define({
             onload(this.responseText);
         });
         xhr.addEventListener('error', function (error) {
-            console.error(error);
+            throw error;
         });
         xhr.open('GET', url);
         xhr.send();

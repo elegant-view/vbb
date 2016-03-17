@@ -1,16 +1,20 @@
-define(['underscore'], function (u) {
+/**
+ * @file 类继承
+ * @author yibuyisheng(yibuyisheng@163.com)
+ */
+
+define(function (require) {
+    var u = require('underscore');
     return function (superClass, subClass, staticProps) {
         staticProps = staticProps || {};
         superClass = superClass || Object;
 
-        var prevSubClassProto = subClass.prototype;
-        subClass.prototype = Object.create(superClass.prototype);
-        subClass.prototype.constructor = subClass;
-        u.extend(subClass.prototype, prevSubClassProto);
-
-        for (var key in staticProps) {
-            subClass[key] = staticProps[key];
-        }
+        function F() {}
+        F.prototype = superClass.prototype;
+        var subClassPrevProto = subClass.prototype;
+        subClass.prototype = new F();
+        u.extend(subClass.prototype, subClassPrevProto);
+        u.extend(subClass, staticProps);
 
         return subClass;
     };
