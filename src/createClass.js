@@ -13,7 +13,7 @@ define(function (require) {
         F.prototype = superClass.prototype;
         var subClassPrevProto = subClass.prototype;
         subClass.prototype = new F();
-        u.extend(subClass.prototype, subClassPrevProto);
+        u.extend(subClass.prototype, subClassPrevProto, {constructor: subClass});
         u.extend(subClass, staticProps);
 
         return subClass;
